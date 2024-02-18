@@ -3,7 +3,7 @@ defmodule TableCheck.Repo.Migrations.CreateRestaurants do
 
   def change do
     create table(:restaurants) do
-      add :name, :text
+      add :name, :text, null: false
 
       timestamps()
     end
