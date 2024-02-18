@@ -4,7 +4,7 @@ defmodule TableCheck.Repo.Migrations.CreateTables do
   def change do
     create table(:tables) do
       add :capacity, :integer, null: false
-      add :restaurant_id, references(:restaurants, on_delete: :delete_all)
+      add :restaurant_id, references(:restaurants, on_delete: :delete_all), null: false
 
       timestamps()
     end
