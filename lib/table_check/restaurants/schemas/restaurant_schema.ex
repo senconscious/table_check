@@ -7,8 +7,12 @@ defmodule TableCheck.Restaurants.RestaurantSchema do
 
   import Ecto.Changeset
 
+  alias TableCheck.Restaurants.TableSchema
+
   schema "restaurants" do
     field :name, :string
+
+    has_many :tables, TableSchema, foreign_key: :restaurant_id
 
     timestamps()
   end
