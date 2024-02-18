@@ -4,6 +4,7 @@ defmodule TableCheck.RepoCase do
   using do
     quote do
       import TableCheck.RepoCase
+      import TableCheck.Helpers.ChangesetHelper
     end
   end
 
