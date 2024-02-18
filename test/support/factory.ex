@@ -20,6 +20,14 @@ defmodule TableCheck.Factory do
     }
   end
 
+  def build(:reservation) do
+    %TableCheck.Reservations.ReservationSchema{
+      status: :pending,
+      start_at: NaiveDateTime.utc_now(),
+      end_at: NaiveDateTime.utc_now()
+    }
+  end
+
   # Convenience API
 
   def build(factory_name, attributes) do

@@ -4,11 +4,22 @@ defmodule TableCheck.Restaurants.TableSchema do
   import Ecto.Changeset
 
   alias TableCheck.Restaurants.RestaurantSchema
+  alias TableCheck.Reservations.ReservationSchema
+
+  @type t :: %__MODULE__{
+          id: integer(),
+          capacity: integer(),
+          restaurant_id: integer(),
+          inserted_at: NaiveDateTime.t(),
+          updated_at: NaiveDateTime.t()
+        }
 
   schema "tables" do
     field :capacity, :integer
 
     belongs_to :restaurant, RestaurantSchema
+
+    has_many :reservations, ReservationSchema, foreign_key: :table_id
 
     timestamps()
   end
