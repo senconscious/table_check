@@ -6,3 +6,6 @@ config :table_check, TableCheck.Repo,
   database: "table_check_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Print only warnings and errors during test
+config :logger, level: :warning
