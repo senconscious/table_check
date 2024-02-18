@@ -8,9 +8,8 @@ defmodule TableCheck.Reservations.ReservationSchema do
 
   schema "reservations" do
     field :status, Ecto.Enum, values: [:pending, :paid, :completed, :cancelled], default: :pending
-    field :date, :date
-    field :start_at, :time
-    field :end_at, :time
+    field :start_at, :naive_datetime
+    field :end_at, :naive_datetime
 
     belongs_to :table, TableSchema
     belongs_to :guest, GuestSchema

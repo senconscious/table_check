@@ -20,7 +20,6 @@ defmodule TableCheck.Reservations.CreateReservationCommandTest do
       |> CreateReservationCommand.build_reservation(%{})
       |> errors_on()
 
-    assert errors.date == ["can't be blank"]
     assert errors.end_at == ["can't be blank"]
     assert errors.start_at == ["can't be blank"]
     assert errors.table_id == ["can't be blank"]
@@ -34,9 +33,8 @@ defmodule TableCheck.Reservations.CreateReservationCommandTest do
     assert {:ok, changes} =
              CreateReservationCommand.execute(%{
                table_id: table.id,
-               date: Date.utc_today(),
-               start_at: ~T[18:00:00],
-               end_at: ~T[20:00:00],
+               start_at: NaiveDateTime.new!(Date.utc_today(), ~T[18:00:00]),
+               end_at: NaiveDateTime.new!(Date.utc_today(), ~T[20:00:00]),
                guest: %{
                  name: "Updated name",
                  phone: guest.phone,

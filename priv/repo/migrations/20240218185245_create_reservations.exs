@@ -6,9 +6,8 @@ defmodule TableCheck.Repo.Migrations.CreateReservations do
 
     create table(:reservations) do
       add :status, :reservation_status, null: false, default: "pending"
-      add :date, :date, null: false
-      add :start_at, :time, null: false
-      add :end_at, :time, null: false
+      add :start_at, :naive_datetime, null: false
+      add :end_at, :naive_datetime, null: false
 
       add :table_id, references(:tables, on_delete: :delete_all), null: false
       add :guest_id, references(:guests, on_delete: :delete_all), null: false
