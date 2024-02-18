@@ -1,0 +1,55 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+enum table_capacity {
+  one
+  two
+  three
+  four
+}
+
+enum reservation_status {
+  pending
+  paid
+  cancelled
+  completed
+}
+
+Table restaurants {
+  id bigint [primary key]
+
+  name text [not null]
+  opening_at time [not null]
+  closing_at time [not null]
+}
+
+Table tables {
+  id bigint [primary key]
+
+  amount integer [not null]
+  capacity table_capacity [not null]
+
+  restaurant_id bigint [ref: > restaurants.id]
+}
+
+Table reservations {
+  id bigint [primary key]
+
+  status reservation_status [not null]
+  date date [not null]
+  start_at time [not null]
+  end_at time [not null]
+
+  table_id bigint [ref: > tables.id]
+  guest_id bigint [ref: > guests.id]
+}
+
+Table guests {
+  id bigint [primary key]
+
+  name text [not null]
+  phone text [not null]
+  email text [not null]
+
+  restaurant_id bigint [ref: > restaurants.id]
+}
