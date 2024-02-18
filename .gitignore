@@ -26,3 +26,5 @@ table_check-*.tar
 /tmp/
 
 .elixir_ls
+
+.DS_Store

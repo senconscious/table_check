@@ -8,6 +8,7 @@ defmodule TableCheck.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      TableCheck.Repo
       # Starts a worker by calling: TableCheck.Worker.start_link(arg)
       # {TableCheck.Worker, arg}
     ]
