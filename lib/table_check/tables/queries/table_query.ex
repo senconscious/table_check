@@ -1,4 +1,8 @@
 defmodule TableCheck.Tables.TableQuery do
+  @moduledoc """
+  Provides table queries
+  """
+
   import Ecto.Query
 
   alias TableCheck.Restaurants.TableSchema

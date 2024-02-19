@@ -1,4 +1,8 @@
 defmodule TableCheck.Restaurants.CreateRestaurantCommand do
+  @moduledoc """
+  Provides business command to add new restaurant in system
+  """
+
   alias TableCheck.Restaurants.RestaurantSchema
 
   alias TableCheck.Repo

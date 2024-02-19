@@ -1,4 +1,8 @@
 defmodule TableCheck.Restaurants.RestaurantQuery do
+  @moduledoc """
+  Provides restaurant queries
+  """
+
   alias TableCheck.Restaurants.RestaurantSchema
 
   alias TableCheck.Repo

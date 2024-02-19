@@ -1,4 +1,9 @@
 defmodule TableCheck.RepoCase do
+  @moduledoc """
+  ExUnit Case with setup database connection.
+  Also imports utility functions from factories and changeset helper
+  """
+
   use ExUnit.CaseTemplate
 
   using do

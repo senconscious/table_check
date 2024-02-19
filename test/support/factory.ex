@@ -1,4 +1,8 @@
 defmodule TableCheck.Factory do
+  @moduledoc """
+  Provides factories for tests
+  """
+
   alias TableCheck.Repo
 
   # Factories

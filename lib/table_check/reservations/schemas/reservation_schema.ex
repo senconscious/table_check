@@ -1,10 +1,13 @@
 defmodule TableCheck.Reservations.ReservationSchema do
+  @moduledoc """
+  Ecto Schema for Reservation entity
+  """
   use Ecto.Schema
 
   import Ecto.Changeset
 
-  alias TableCheck.Restaurants.TableSchema
   alias TableCheck.Reservations.GuestSchema
+  alias TableCheck.Restaurants.TableSchema
 
   schema "reservations" do
     field :status, Ecto.Enum, values: [:pending, :paid, :completed, :cancelled], default: :pending

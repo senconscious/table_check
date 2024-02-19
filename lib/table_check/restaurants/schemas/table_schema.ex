@@ -1,10 +1,14 @@
 defmodule TableCheck.Restaurants.TableSchema do
+  @moduledoc """
+  Ecto Schema for Table entity
+  """
+
   use Ecto.Schema
 
   import Ecto.Changeset
 
-  alias TableCheck.Restaurants.RestaurantSchema
   alias TableCheck.Reservations.ReservationSchema
+  alias TableCheck.Restaurants.RestaurantSchema
 
   @type t :: %__MODULE__{
           id: integer(),

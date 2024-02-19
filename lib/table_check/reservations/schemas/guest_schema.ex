@@ -1,4 +1,8 @@
 defmodule TableCheck.Reservations.GuestSchema do
+  @moduledoc """
+  Ecto Schema for Guest entity
+  """
+
   use Ecto.Schema
 
   import Ecto.Changeset

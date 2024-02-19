@@ -1,4 +1,8 @@
 defmodule TableCheck.Reservations.CreateReservationCommand do
+  @moduledoc """
+  Provides business command to create reservation in system.
+  """
+
   alias TableCheck.Reservations.GuestSchema
   alias TableCheck.Reservations.ReservationSchema
 
