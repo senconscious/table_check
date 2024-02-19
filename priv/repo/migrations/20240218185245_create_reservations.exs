@@ -14,6 +14,10 @@ defmodule TableCheck.Repo.Migrations.CreateReservations do
       timestamps()
     end
 
+    create index(:reservations, [:table_id])
+    # Create index for future
+    create index(:reservations, [:guest_id])
+
     create constraint(:reservations, :time_not_overlap, exclude: ~s|gist(table_id WITH =, tsrange("start_at", "end_at", '[]') WITH &&)|)
   end
 
