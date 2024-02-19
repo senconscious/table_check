@@ -1,3 +1,4 @@
+# credo:disable-for-this-file Credo.Check.Design.AliasUsage
 defmodule TableCheck.RepoCase do
   @moduledoc """
   ExUnit Case with setup database connection.
