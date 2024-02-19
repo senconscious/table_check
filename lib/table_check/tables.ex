@@ -8,7 +8,7 @@ defmodule TableCheck.Tables do
   `min_datetime` and `max_datetime` keys.
   Availability check range borders are inclusive.
   So if there is a reservation for table at `2024-02-19 17:00:00` and your
-  `max_datetime` is `~N[2024-02-19 17:00:00]` that this table won't be available.
+  `max_datetime` is `~N[2024-02-19 17:00:00]` than this table won't be available.
 
   ```elixir
   iex> TableCheck.Tables.list_available_tables(%{

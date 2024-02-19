@@ -20,11 +20,11 @@ defmodule TableCheck.Reservations do
   ```
 
   If the same guest try to reserve a table in the same restaurant in the future
-  that it'll be upserted.
+  than it'll be upserted.
 
   ## Listing reservations
 
-  Your can check all reservations in the sysmet by calling:
+  Your can check all reservations in the system by calling:
 
   ```elixir
   iex> TableCheck.Reservations.list_reservations()
