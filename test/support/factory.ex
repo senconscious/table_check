@@ -17,6 +17,15 @@ defmodule TableCheck.Factory do
     %TableCheck.Restaurants.TableSchema{capacity: 1}
   end
 
+  def build(:restaurant_with_tables) do
+    %TableCheck.Restaurants.RestaurantSchema{
+      name: "some restaurant name",
+      tables: [
+        build(:table)
+      ]
+    }
+  end
+
   def build(:guest) do
     %TableCheck.Reservations.GuestSchema{
       name: "Some guest name",
