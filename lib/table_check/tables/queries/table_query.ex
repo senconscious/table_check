@@ -38,6 +38,7 @@ defmodule TableCheck.Tables.TableQuery do
     TableSchema
     |> with_reservation(filters)
     |> by_restaurant(filters)
+    |> distinct(true)
     |> select_ids()
     |> Repo.all()
   end
