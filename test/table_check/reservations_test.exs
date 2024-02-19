@@ -30,9 +30,52 @@ defmodule TableCheck.ReservationsTest do
     assert [^first_reservation] = Reservations.list_reservations(%{table_id: first_table.id})
   end
 
+  test "create_reservations/1 upserts existing guest" do
+    %{tables: [table], guests: [guest]} = restaurant = insert!(:restaurant_with_tables_and_guests)
+
+    assert {:ok, changes} =
+             Reservations.create_reservations(%{
+               table_id: table.id,
+               start_at: new_timestamp!(~T[18:00:00]),
+               end_at: new_timestamp!(~T[20:00:00]),
+               guest: %{
+                 name: "Updated name",
+                 phone: guest.phone,
+                 restaurant_id: restaurant.id
+               }
+             })
+
+    assert changes.guest.id == guest.id
+  end
+
+  test "create_reservations/1 double book not possible" do
+    %{tables: [table], guests: [guest]} = restaurant = insert!(:restaurant_with_tables_and_guests)
+
+    insert!(:reservation,
+      guest_id: guest.id,
+      table_id: table.id,
+      start_at: new_timestamp!(~T[18:00:00]),
+      end_at: new_timestamp!(~T[22:00:00])
+    )
+
+    assert {:error, :reservation, changeset, _} =
+             Reservations.create_reservations(%{
+               start_at: new_timestamp!(~T[17:00:00]),
+               end_at: new_timestamp!(~T[21:00:00]),
+               table_id: table.id,
+               guest: %{name: guest.name, phone: guest.phone, restaurant_id: restaurant.id}
+             })
+
+    assert errors_on(changeset).table_id == ["already reserved"]
+  end
+
   defp naive_tomorrow do
     NaiveDateTime.utc_now()
     |> NaiveDateTime.add(1, :day)
     |> NaiveDateTime.truncate(:second)
+  end
+
+  defp new_timestamp!(time) do
+    NaiveDateTime.new!(Date.utc_today(), time)
   end
 end
