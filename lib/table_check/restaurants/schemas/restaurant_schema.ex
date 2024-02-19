@@ -7,6 +7,7 @@ defmodule TableCheck.Restaurants.RestaurantSchema do
 
   import Ecto.Changeset
 
+  alias TableCheck.Reservations.GuestSchema
   alias TableCheck.Restaurants.TableSchema
 
   @type t :: %__MODULE__{
@@ -20,6 +21,7 @@ defmodule TableCheck.Restaurants.RestaurantSchema do
     field :name, :string
 
     has_many :tables, TableSchema, foreign_key: :restaurant_id
+    has_many :guests, GuestSchema, foreign_key: :restaurant_id
 
     timestamps()
   end

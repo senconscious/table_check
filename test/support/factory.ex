@@ -26,6 +26,18 @@ defmodule TableCheck.Factory do
     }
   end
 
+  def build(:restaurant_with_tables_and_guests) do
+    %TableCheck.Restaurants.RestaurantSchema{
+      name: "some restaurant name",
+      tables: [
+        build(:table)
+      ],
+      guests: [
+        build(:guest)
+      ]
+    }
+  end
+
   def build(:guest) do
     %TableCheck.Reservations.GuestSchema{
       name: "Some guest name",
@@ -35,9 +47,13 @@ defmodule TableCheck.Factory do
 
   def build(:reservation) do
     %TableCheck.Reservations.ReservationSchema{
-      start_at: NaiveDateTime.utc_now(),
-      end_at: NaiveDateTime.utc_now()
+      start_at: naive_utc_now(),
+      end_at: naive_utc_now()
     }
+  end
+
+  defp naive_utc_now do
+    NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second)
   end
 
   # Convenience API
