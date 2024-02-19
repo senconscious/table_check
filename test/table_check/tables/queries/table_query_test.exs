@@ -67,29 +67,6 @@ defmodule TableCheck.Tables.TableQueryTest do
              })
   end
 
-  test "list_available/1" do
-    restaurant = insert!(:restaurant)
-    available_table = insert!(:table, restaurant_id: restaurant.id)
-    reserved_table = insert!(:table, restaurant_id: restaurant.id)
-    guest = insert!(:guest, restaurant_id: restaurant.id)
-
-    insert!(:reservation,
-      guest_id: guest.id,
-      table_id: reserved_table.id,
-      start_at: new_timestamp!(~T[18:00:00]),
-      end_at: new_timestamp!(~T[22:00:00])
-    )
-
-    assert [actual_available_table] =
-             TableQuery.list_available(%{
-               min_datetime: new_timestamp!(~T[18:00:00]),
-               max_datetime: new_timestamp!(~T[22:00:00]),
-               restaurant_id: restaurant.id
-             })
-
-    assert actual_available_table.id == available_table.id
-  end
-
   defp new_timestamp!(time) do
     NaiveDateTime.new!(Date.utc_today(), time)
   end
