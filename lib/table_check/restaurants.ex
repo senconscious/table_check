@@ -1,6 +1,6 @@
 defmodule TableCheck.Restaurants do
   @moduledoc """
-  API interface for restaurants
+  API interface to manage restaurant and it's tables
   """
 
   alias TableCheck.Restaurants.RestaurantQuery

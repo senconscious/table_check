@@ -1,6 +1,6 @@
 defmodule TableCheck.Reservations do
   @moduledoc """
-  API interface for reservations
+  API interface to manage restaurant table reservations
   """
 
   alias TableCheck.Reservations.ReservationQuery

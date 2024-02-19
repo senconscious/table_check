@@ -1,6 +1,6 @@
 defmodule TableCheck.Tables do
   @moduledoc """
-  API interface for tables.
+  API interface to query restaurant tables availability
   """
 
   alias TableCheck.Tables.TableQuery
