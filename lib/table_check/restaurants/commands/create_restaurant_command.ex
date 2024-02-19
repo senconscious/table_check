@@ -8,8 +8,8 @@ defmodule TableCheck.Restaurants.CreateRestaurantCommand do
   alias TableCheck.Repo
 
   @type attrs :: %{
-    name: String.t()
-  }
+          name: String.t()
+        }
 
   @spec execute(attrs()) :: {:ok, RestaurantSchema.t()} | {:error, Ecto.Changeset.t()}
   def execute(attrs) do

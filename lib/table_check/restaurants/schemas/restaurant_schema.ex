@@ -10,11 +10,11 @@ defmodule TableCheck.Restaurants.RestaurantSchema do
   alias TableCheck.Restaurants.TableSchema
 
   @type t :: %__MODULE__{
-    id: integer(),
-    name: String.t(),
-    inserted_at: NaiveDateTime.t(),
-    updated_at: NaiveDateTime.t()
-  }
+          id: integer(),
+          name: String.t(),
+          inserted_at: NaiveDateTime.t(),
+          updated_at: NaiveDateTime.t()
+        }
 
   schema "restaurants" do
     field :name, :string
