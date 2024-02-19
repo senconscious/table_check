@@ -3,6 +3,14 @@ defmodule TableCheck.RestaurantsTest do
 
   alias TableCheck.Restaurants
 
+  test "list_restaurants properly fetches restaurants" do
+    assert [] = Restaurants.list_restaurants()
+
+    restaurant = insert!(:restaurant)
+
+    assert [^restaurant] = Restaurants.list_restaurants()
+  end
+
   test "list_tables/1 properly fetches restaurant table" do
     %{tables: [table]} = restaurant = insert!(:restaurant_with_tables)
 
