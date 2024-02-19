@@ -10,13 +10,13 @@ defmodule TableCheck.Reservations.GuestSchema do
   alias TableCheck.Restaurants.RestaurantSchema
 
   @type t :: %__MODULE__{
-    id: integer(),
-    name: String.t(),
-    phone: String.t(),
-    restaurant_id: integer(),
-    inserted_at: NaiveDateTime.t(),
-    updated_at: NaiveDateTime.t()
-  }
+          id: integer(),
+          name: String.t(),
+          phone: String.t(),
+          restaurant_id: integer(),
+          inserted_at: NaiveDateTime.t(),
+          updated_at: NaiveDateTime.t()
+        }
 
   schema "guests" do
     field :name, :string
