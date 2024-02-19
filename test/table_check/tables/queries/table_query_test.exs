@@ -13,8 +13,9 @@ defmodule TableCheck.Tables.TableQueryTest do
   end
 
   test "list_reserved_table_ids/1 returns appropriate table ids" do
-    restaurant = insert!(:restaurant)
-    table = insert!(:table, restaurant_id: restaurant.id)
+    %{guests: [guest], tables: [table]} =
+      restaurant =
+      insert!(:restaurant_with_tables_and_guests)
 
     assert [] ==
              TableQuery.list_reserved_table_ids(%{
@@ -22,8 +23,6 @@ defmodule TableCheck.Tables.TableQueryTest do
                max_datetime: new_timestamp!(~T[22:00:00]),
                restaurant_id: restaurant.id
              })
-
-    guest = insert!(:guest, restaurant_id: restaurant.id)
 
     insert!(:reservation,
       guest_id: guest.id,
