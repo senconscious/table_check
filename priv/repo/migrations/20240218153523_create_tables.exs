@@ -9,6 +9,8 @@ defmodule TableCheck.Repo.Migrations.CreateTables do
       timestamps()
     end
 
+    create index(:tables, [:restaurant_id])
+
     create constraint(:tables, :capacity_must_be_positive, check: "capacity > 0")
   end
 end
