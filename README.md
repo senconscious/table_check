@@ -133,3 +133,9 @@ To run tests:
 ```sh
 mix test
 ```
+
+To run with cover:
+
+```sh
+mix test --cover
+```

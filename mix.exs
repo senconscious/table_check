@@ -12,6 +12,15 @@ defmodule TableCheck.MixProject do
       aliases: aliases(),
       dialyzer: [
         plt_file: {:no_warn, "priv/plts/project.plt"}
+      ],
+      test_coverage: [
+        ignore_modules: [
+          TableCheck.Repo,
+          TableCheck.RepoCase,
+          TableCheck.Factory,
+          TableCheck,
+          TableCheck.Application
+        ]
       ]
     ]
   end
