@@ -16,10 +16,12 @@ defmodule TableCheck.Reservations.CreateReservationCommand do
     |> Repo.transaction()
   end
 
+  @doc false
   def build_guest(attrs) do
     GuestSchema.changeset(%GuestSchema{}, attrs)
   end
 
+  @doc false
   def build_reservation(%{guest: %{id: guest_id}}, attrs) do
     ReservationSchema.changeset(%ReservationSchema{}, Map.put(attrs, :guest_id, guest_id))
   end

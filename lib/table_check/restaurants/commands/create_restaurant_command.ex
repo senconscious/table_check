@@ -9,6 +9,7 @@ defmodule TableCheck.Restaurants.CreateRestaurantCommand do
     |> Repo.insert()
   end
 
+  @doc false
   def build_new_restaurant(attrs) do
     RestaurantSchema.changeset(%RestaurantSchema{}, attrs)
   end
