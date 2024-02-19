@@ -10,6 +10,23 @@ defmodule TableCheck.Reservations.CreateReservationCommand do
 
   alias TableCheck.Repo
 
+  @type attrs :: %{
+          start_at: NaiveDateTime.t(),
+          end_at: NaiveDateTime.t(),
+          table_id: integer(),
+          guest: %{
+            name: String.t(),
+            phone: String.t(),
+            restaurant_id: integer()
+          }
+        }
+
+  @type reservation_with_guest :: %{
+    guest: GuestSchema.t(),
+    reservation: ReservationSchema.t()
+  }
+
+  @spec execute(attrs()) :: {:ok, reservation_with_guest()} | {:error, Ecto.Multi.name(), Ecto.Changeset.t(), map()}
   def execute(attrs) do
     Multi.new()
     |> Multi.insert(:guest, build_guest(attrs.guest),

@@ -9,6 +9,17 @@ defmodule TableCheck.Reservations.ReservationSchema do
   alias TableCheck.Reservations.GuestSchema
   alias TableCheck.Restaurants.TableSchema
 
+  @type t :: %__MODULE__{
+          id: integer(),
+          status: :pending | :paid | :completed | :cancelled,
+          start_at: NaiveDateTime.t(),
+          end_at: NaiveDateTime.t(),
+          table_id: integer(),
+          guest_id: integer(),
+          inserted_at: NaiveDateTime.t(),
+          updated_at: NaiveDateTime.t()
+        }
+
   schema "reservations" do
     field :status, Ecto.Enum, values: [:pending, :paid, :completed, :cancelled], default: :pending
     field :start_at, :naive_datetime
