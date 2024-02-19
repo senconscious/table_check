@@ -11,7 +11,6 @@ defmodule TableCheck.Reservations.ReservationSchema do
 
   @type t :: %__MODULE__{
           id: integer(),
-          status: :pending | :paid | :completed | :cancelled,
           start_at: NaiveDateTime.t(),
           end_at: NaiveDateTime.t(),
           table_id: integer(),
@@ -21,7 +20,6 @@ defmodule TableCheck.Reservations.ReservationSchema do
         }
 
   schema "reservations" do
-    field :status, Ecto.Enum, values: [:pending, :paid, :completed, :cancelled], default: :pending
     field :start_at, :naive_datetime
     field :end_at, :naive_datetime
 

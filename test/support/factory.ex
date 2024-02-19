@@ -26,7 +26,6 @@ defmodule TableCheck.Factory do
 
   def build(:reservation) do
     %TableCheck.Reservations.ReservationSchema{
-      status: :pending,
       start_at: NaiveDateTime.utc_now(),
       end_at: NaiveDateTime.utc_now()
     }

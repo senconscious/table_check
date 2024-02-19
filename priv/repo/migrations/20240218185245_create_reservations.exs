@@ -3,10 +3,8 @@ defmodule TableCheck.Repo.Migrations.CreateReservations do
 
   def up do
     execute("CREATE EXTENSION IF NOT EXISTS btree_gist")
-    execute("CREATE TYPE reservation_status AS ENUM('pending', 'paid', 'completed', 'cancelled')")
 
     create table(:reservations) do
-      add :status, :reservation_status, null: false, default: "pending"
       add :start_at, :naive_datetime, null: false
       add :end_at, :naive_datetime, null: false
 
@@ -21,7 +19,5 @@ defmodule TableCheck.Repo.Migrations.CreateReservations do
 
   def down do
     drop table(:reservations)
-
-    execute("DROP TYPE reservation_status")
   end
 end
