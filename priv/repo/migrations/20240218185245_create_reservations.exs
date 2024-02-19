@@ -2,6 +2,7 @@ defmodule TableCheck.Repo.Migrations.CreateReservations do
   use Ecto.Migration
 
   def up do
+    execute("CREATE EXTENSION IF NOT EXISTS btree_gist")
     execute("CREATE TYPE reservation_status AS ENUM('pending', 'paid', 'completed', 'cancelled')")
 
     create table(:reservations) do
@@ -14,6 +15,8 @@ defmodule TableCheck.Repo.Migrations.CreateReservations do
 
       timestamps()
     end
+
+    create constraint(:reservations, :time_not_overlap, exclude: ~s|gist(table_id WITH =, tsrange("start_at", "end_at", '[]') WITH &&)|)
   end
 
   def down do

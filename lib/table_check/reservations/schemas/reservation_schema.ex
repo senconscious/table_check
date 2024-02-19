@@ -39,6 +39,7 @@ defmodule TableCheck.Reservations.ReservationSchema do
     |> validate_required(fields)
     |> foreign_key_constraint(:table_id)
     |> foreign_key_constraint(:guest_id)
+    |> exclusion_constraint(:table_id, name: :time_not_overlap, message: "already reserved")
   end
 
   defp fields do
