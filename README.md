@@ -4,9 +4,27 @@
 
 ## Up and running
 
-Install erlang and elixir versions from [tool versions file](./.tool-versions).
+1. Install erlang and elixir versions from [tool versions file](./.tool-versions).
 
-TODO
+2. Ensure your Postgres is running and accesable on localhost:5432 with default creds
+
+3. Fetch deps: 
+
+```sh
+mix deps.get
+```
+
+4. Create database, migrate it and seed data
+
+```sh
+mix ecto.reset
+```
+
+5. Start application with iex console:
+
+```sh
+iex -S mix
+```
 
 ## Description and assumptations
 
