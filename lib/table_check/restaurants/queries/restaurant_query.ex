@@ -7,6 +7,7 @@ defmodule TableCheck.Restaurants.RestaurantQuery do
 
   alias TableCheck.Repo
 
+  @spec list_all() :: [RestaurantSchema.t()]
   def list_all do
     Repo.all(RestaurantSchema)
   end
