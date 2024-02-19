@@ -3,7 +3,11 @@ defmodule TableCheck.Reservations do
   API interface for reservations
   """
 
+  alias TableCheck.Reservations.ReservationQuery
+
   alias TableCheck.Reservations.CreateReservationCommand
 
   defdelegate create_reservations(attrs), to: CreateReservationCommand, as: :execute
+
+  defdelegate list_reservations, to: ReservationQuery, as: :list_all
 end
