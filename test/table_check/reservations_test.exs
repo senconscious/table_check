@@ -15,8 +15,8 @@ defmodule TableCheck.ReservationsTest do
       insert!(:reservation,
         table_id: second_table.id,
         guest_id: guest.id,
-        start_at: naive_tomorrow(),
-        end_at: naive_tomorrow()
+        start_at: tomorrow_timestamp(),
+        end_at: tomorrow_timestamp()
       )
 
     assert reservations = Reservations.list_reservations()
@@ -25,7 +25,7 @@ defmodule TableCheck.ReservationsTest do
     assert second_reservation in reservations
 
     assert [^second_reservation] =
-             Reservations.list_reservations(%{date: NaiveDateTime.to_date(naive_tomorrow())})
+             Reservations.list_reservations(%{date: NaiveDateTime.to_date(tomorrow_timestamp())})
 
     assert [^first_reservation] = Reservations.list_reservations(%{table_id: first_table.id})
   end
@@ -36,8 +36,8 @@ defmodule TableCheck.ReservationsTest do
     assert {:ok, changes} =
              Reservations.create_reservations(%{
                table_id: table.id,
-               start_at: new_timestamp!(~T[18:00:00]),
-               end_at: new_timestamp!(~T[20:00:00]),
+               start_at: today_at!(~T[18:00:00]),
+               end_at: today_at!(~T[20:00:00]),
                guest: %{
                  name: "Updated name",
                  phone: guest.phone,
@@ -54,14 +54,14 @@ defmodule TableCheck.ReservationsTest do
     insert!(:reservation,
       guest_id: guest.id,
       table_id: table.id,
-      start_at: new_timestamp!(~T[18:00:00]),
-      end_at: new_timestamp!(~T[22:00:00])
+      start_at: today_at!(~T[18:00:00]),
+      end_at: today_at!(~T[22:00:00])
     )
 
     assert {:error, :reservation, changeset, _} =
              Reservations.create_reservations(%{
-               start_at: new_timestamp!(~T[17:00:00]),
-               end_at: new_timestamp!(~T[21:00:00]),
+               start_at: today_at!(~T[17:00:00]),
+               end_at: today_at!(~T[21:00:00]),
                table_id: table.id,
                guest: %{name: guest.name, phone: guest.phone, restaurant_id: restaurant.id}
              })
@@ -69,13 +69,13 @@ defmodule TableCheck.ReservationsTest do
     assert errors_on(changeset).table_id == ["already reserved"]
   end
 
-  defp naive_tomorrow do
+  defp tomorrow_timestamp do
     NaiveDateTime.utc_now()
     |> NaiveDateTime.add(1, :day)
     |> NaiveDateTime.truncate(:second)
   end
 
-  defp new_timestamp!(time) do
+  defp today_at!(time) do
     NaiveDateTime.new!(Date.utc_today(), time)
   end
 end
