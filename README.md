@@ -102,12 +102,29 @@ iex -S mix
 iex> {:ok, restaurant} = TableCheck.Restaurants.create_restaurant(%{
     name: "My best restaurant"
     })
+
+{:ok,
+ %TableCheck.Restaurants.RestaurantSchema{
+   id: 41,
+   name: "My best restaurant",
+   inserted_at: ~N[2024-02-21 09:53:21],
+   updated_at: ~N[2024-02-21 09:53:21]
+ }}
 ```
 
 2. Create table for restaurant:
 
 ```elixir
 iex> {:ok, table} = TableCheck.Restaurants.create_table(%{capacity: 1, restaurant_id: restaurant.id})
+
+{:ok,
+ %TableCheck.Restaurants.TableSchema{
+   id: 401,
+   capacity: 1,
+   restaurant_id: 42,
+   inserted_at: ~N[2024-02-21 09:55:47],
+   updated_at: ~N[2024-02-21 09:55:47]
+ }}
 ```
 
 3. Create reservation for restaurant table:
@@ -123,23 +140,57 @@ iex> TableCheck.Reservations.create_reservations(%{
                 restaurant_id: restaurant.id
             }
     })
+
+{:ok,
+ %{
+   guest: %TableCheck.Reservations.GuestSchema{
+     id: 32001,
+     name: "my best guest",
+     phone: "some_magic_phone",
+     restaurant_id: 42,
+     inserted_at: ~N[2024-02-21 09:57:37],
+     updated_at: ~N[2024-02-21 09:57:37]
+   },
+   reservation: %TableCheck.Reservations.ReservationSchema{
+     id: 32001,
+     start_at: ~N[2024-02-19 18:00:00],
+     end_at: ~N[2024-02-19 22:00:00],
+     table_id: 401,
+     guest_id: 32001,
+     inserted_at: ~N[2024-02-21 09:57:37],
+     updated_at: ~N[2024-02-21 09:57:37]
+   }
+ }}
 ```
 
 4. Check restaurant availability:
 
 ```elixir
     # all tables reserved:
-    iex> [] = TableCheck.Tables.list_available_tables(%{
+    iex> TableCheck.Tables.list_available_tables(%{
         restaurant_id: restaurant.id,
         min_datetime: ~N[2024-02-19 17:00:00],
         max_datetime: ~N[2024-02-19 19:00:00]
     })
+
+[]
+
     # there is available table
     iex> TableCheck.Tables.list_available_tables(%{
         restaurant_id: restaurant.id,
         min_datetime: ~N[2024-02-20 17:00:00],
         max_datetime: ~N[2024-02-20 19:00:00]
     })
+
+[
+  %TableCheck.Restaurants.TableSchema{
+    id: 401,
+    capacity: 1,
+    restaurant_id: 42,
+    inserted_at: ~N[2024-02-21 09:55:47],
+    updated_at: ~N[2024-02-21 09:55:47]
+  }
+]
 ```
 
 For more usage docs please refer to contexts.
