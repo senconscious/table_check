@@ -15,7 +15,19 @@
 
 The main context modules serve as an interface and only call public functions from either query or command modules.
 
-There three contextes:
+Command module should containt some business flow that is important for application.
+
+Query module should contain either quering data from storage layer either simple
+queries that change state of database (like update_all call etc). But in this prototype even simple state change queries are in command modules.
+
+Also inner context modules (command, query, schema) follow the same naming convention as controllers in phoenix:
+- type folder ommitted from module name;
+- module name is postfixed with type;
+
+Example controller in phoenix: `AcmeWeb.PostController`.
+Example inner module: `TableCheck.Reservations.ReservationSchema`.
+
+There three contexts:
 
 1. [Restaurants](./lib/table_check/restaurants.ex) -> to manage restaurant and it's tables
 2. [Reservations](./lib/table_check/reservations.ex) -> to manage reservation on restaurant tables
