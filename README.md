@@ -21,6 +21,7 @@ Query module should contain either quering data from storage layer either simple
 queries that change state of database (like update_all call etc). But in this prototype even simple state change queries are in command modules.
 
 Also inner context modules (command, query, schema) follow the same naming convention as controllers in phoenix:
+
 - type folder ommitted from module name;
 - module name is postfixed with type;
 
@@ -51,17 +52,22 @@ don't have a general table inventory.
 
 #### Guests
 
-Entity represents required information about the person who reserves a table: name, phone, email. Also, specific guests are linked to a specific restaurant. 
+Entity represents required information about the person who reserves a table: name, phone, email. Also, specific guests are linked to a specific restaurant.
 We assume guest uniqueness by restaurant and phone number.
+
+For simplicity, we could include this information to reservations,
+but as a general rule, it's a good solution to separate different data
+into different tables. Maybe in the future we'll need more functionality
+specifically for guests.
 
 #### Reservations
 
-The entity represents a table reservation for a specific date and time. Has the required date, start_at, end_at, table_id, and guest_id fields. 
+The entity represents a table reservation for a specific date and time. Has the required date, start_at, end_at, table_id, and guest_id fields.
 In this prototype, we don't have any status associated with a reservation.
 
 Reservation uniqueness is guaranteed by the database exclusion constraint on table ID and reservation date and time range.
 
-Also, we don't have any checks on the reservation time limit, etc. 
+Also, we don't have any checks on the reservation time limit, etc.
 (You can create reservations that have already been passed.)
 
 ## Up and running
