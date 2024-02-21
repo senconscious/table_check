@@ -6,7 +6,7 @@
 
 [Database schema](./db_schema.png)
 
-- There are some data constraints in this prototype depending on Postgres.
+- Double booking table exclusion is supported by PostgreSQL exclude constraint. So it must be considered when moving on another storage adapter.
 - Timezones are ignored in this prototype.
 - Reservation time borders are inclusive.
 - There is no passed-argument verification except for ones in changesets.
