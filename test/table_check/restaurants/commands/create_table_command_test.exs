@@ -4,18 +4,30 @@ defmodule TableCheck.Restaurants.CreateTableCommandTest do
   alias TableCheck.Restaurants.CreateTableCommand
 
   test "build_new_table/1 empty attrs provided" do
-    errors = errors_on(CreateTableCommand.build_new_table(%{}))
+    errors =
+      %{}
+      |> CreateTableCommand.build_new_table()
+      |> errors_on()
+
     assert errors.capacity == ["can't be blank"]
     assert errors.restaurant_id == ["can't be blank"]
   end
 
   test "build_new_table/1 non positive capacity provided" do
-    errors = errors_on(CreateTableCommand.build_new_table(%{capacity: 0, restaurant_id: 1}))
+    errors =
+      %{capacity: 0, restaurant_id: 1}
+      |> CreateTableCommand.build_new_table()
+      |> errors_on()
+
     assert errors.capacity == ["must be greater than 0"]
   end
 
   test "build_new_table/1 when valid attrs provided" do
-    errors = errors_on(CreateTableCommand.build_new_table(%{capacity: 1, restaurant_id: 1}))
+    errors =
+      %{capacity: 1, restaurant_id: 1}
+      |> CreateTableCommand.build_new_table()
+      |> errors_on()
+
     assert errors == %{}
   end
 

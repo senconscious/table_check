@@ -4,12 +4,20 @@ defmodule TableCheck.Restaurants.CreateRestaurantCommandTest do
   alias TableCheck.Restaurants.CreateRestaurantCommand
 
   test "build_new_restaurant/1 when no name provided" do
-    errors = errors_on(CreateRestaurantCommand.build_new_restaurant(%{}))
+    errors =
+      %{}
+      |> CreateRestaurantCommand.build_new_restaurant()
+      |> errors_on()
+
     assert errors.name == ["can't be blank"]
   end
 
   test "build_new_restaurant/1 when valid attrs provided" do
-    errors = errors_on(CreateRestaurantCommand.build_new_restaurant(%{name: "test restaurant"}))
+    errors =
+      %{name: "test restaurant"}
+      |> CreateRestaurantCommand.build_new_restaurant()
+      |> errors_on()
+
     assert errors == %{}
   end
 end
