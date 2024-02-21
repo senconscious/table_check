@@ -35,6 +35,7 @@ defmodule TableCheck.Reservations.ReservationSchema do
     struct
     |> cast(attrs, fields)
     |> validate_required(fields)
+    |> validate_time_order()
     |> foreign_key_constraint(:table_id)
     |> foreign_key_constraint(:guest_id)
     |> exclusion_constraint(:table_id, name: :time_not_overlap, message: "already reserved")
@@ -43,4 +44,22 @@ defmodule TableCheck.Reservations.ReservationSchema do
   defp fields do
     (__schema__(:fields) -- __schema__(:primary_key)) -- [:inserted_at, :updated_at]
   end
+
+  defp validate_time_order(%{valid?: true} = changeset) do
+    start_at = get_field(changeset, :start_at)
+    end_at = get_field(changeset, :end_at)
+
+    case NaiveDateTime.compare(start_at, end_at) do
+      :gt ->
+        add_error(changeset, :end_at, "must be latter that start_at")
+
+      :eq ->
+        add_error(changeset, :end_at, "can't be the same as start_at")
+
+      :lt ->
+        changeset
+    end
+  end
+
+  defp validate_time_order(changeset), do: changeset
 end
